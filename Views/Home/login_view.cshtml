@@ -1,0 +1,41 @@
+﻿<div class="container">
+    @{
+        ViewBag.Title = "Login Page";
+    }
+
+    <h2>Please Login to the Site.</h2>
+
+    @*@if (ViewBag.msg == "not" || ViewBag.mg == "error")
+    {
+        <h3 class="text-danger">Somethings Wrong</h3>
+    }
+    else
+    {
+        <h1>asdasdasdsad</h1>
+    }*@
+
+    <form action="@Url.Action("auth", "Api")" method="post">
+
+        <div class="form-group">
+            <label>Enter Username</label>
+            <input class="form-control" type="text" placeholder="Enter Username" name="uname" />
+        </div>
+
+        <div class="form-group">
+            <label>Enter Password</label>
+            <input class="form-control" type="password" placeholder="Enter Password" name="upass" />
+        </div>
+
+        <div>
+            <input class="btn btn-primary" type="submit" value="Login" />
+        </div>
+
+    </form>
+
+    <br />
+    <div">
+        <p><a class="text-primary" href="../Home/reg_view">Register With Us! </a></p>
+        <p><a class="text-primary" href="../Home/resetpw"> Forgot password?</a></p>
+</div>
+    
+

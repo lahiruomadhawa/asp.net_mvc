@@ -1,0 +1,157 @@
+﻿@model shad_web_app.Models.Entity.User
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+<div class="container">
+
+    @if (ViewBag.adw != null)
+    {
+    <div>
+        @if (ViewBag.adw2 == "ok")
+        {
+            <h3 class="text-success">Hello <b>@ViewBag.adw,</b> Wellcome to the Site.</h3>
+            <h4 class="text-success">Please Loging to the Site for go Further.</h4>
+            <br />
+        }
+        else if (ViewBag.adw2 == "not")
+        {
+            <h3 class="text-warning">Something Wrong : @ViewBag.adw2.</h3>
+        }
+        else
+        {
+            <h3 class="text-warning">Something Wrong : @ViewBag.adw2.</h3>
+        }
+    </div>
+    }
+
+
+    <form action="@Url.Action("reg","Api")" method="post">
+        <div id="unamediv" class="form-group">
+            <label>Username</label>
+            <input id="uname" class="form-control" type="text" placeholder="Enter Your Username" name="UserName" />
+            <p id="uname_err" class="text-danger bg-danger"></p>
+        </div>
+
+        <div id="upassdiv" class="form-group">
+            <label>Password</label>
+            <input id="upass" class="form-control" type="password" placeholder="Enter Your Password" name="UserPassword" />
+            <p id="upass_err" class="text-danger bg-danger"></p>
+        </div>
+
+        <div id="uagediv" class="form-group">
+            <label>Age</label>
+            <input id="uage" class="form-control" type="number" placeholder="Enter Your Age" name="UserAge" />
+            <p id="uage_err" class="text-danger bg-danger"></p>
+        </div>
+
+        <div id="uaddressdiv" class="form-group">
+            <label>Address</label>
+            <input id="uaddress" class="form-control" type="text" placeholder="Enter Your Address" name="UserAddress" />
+            <p id="uaddress_err" class="text-danger bg-danger"></p>
+        </div>
+
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" />
+        </div>
+    </form>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#uname_err").hide();
+            $("#upass_err").hide();
+            $("#uage_err").hide();
+            $("#uaddress_err").hide();
+            ////
+            $("#unamediv").focusout(function () {
+                chechName();
+            });
+
+            $("#unamediv").focusin(function () {
+                $("#uname_err").hide();
+            });
+            ////
+            $("#upassdiv").focusout(function () {
+                checkPass();
+            });
+
+            $("#upassdiv").focusin(function () {
+                $("#upass_err").hide();
+            });
+            ////
+            $("#uagediv").focusout(function () {
+                checkAge();
+            });
+
+            $("#uagediv").focusin(function () {
+                $("#uage_err").hide();
+            });
+            ////
+            $("#uaddressdiv").focusout(function () {
+                checkAddress();
+            });
+
+            $("#uaddressdiv").focusin(function () {
+                $("#uaddress_err").hide();
+            });
+
+            function chechName() {
+                var len = $("input[id=uname]").val().length;
+                if (len == 0) {
+                    $("#uname_err").text("Cannot Empty Username Field!");
+                    $("#uname_err").show();
+                }
+                else if (/\d/.test($("input[id=uname]").val())) {
+                    $("#uname_err").text("Cannot User Numbers in Username Field!");
+                    $("#uname_err").show();
+                }
+            }
+
+            function checkPass() {
+                var len = $("input[id=upass]").val().length;
+                if (len == 0) {
+                    $("#upass_err").text("Cannot Empty Password Field!");
+                    $("#upass_err").show();
+                }
+                else if (len < 2 || len > 10) {
+                    $("#upass_err").text("Password Should be 2-10 characters!");
+                    $("#upass_err").show();
+                }
+            }
+
+            function checkAge() {
+                var len = $("input[id=uage]").val().length;
+                var age = parseInt($("input[id=uage]").val());
+                if (len <= 0 || len >= 3) {
+                    $("#uage_err").text("Enter Valid Age!");
+                    $("#uage_err").show();
+                }
+                else if (age < 18 || age > 80) {
+                    $("#uage_err").text("Age Should be above 18 years!");
+                    $("#uage_err").show();
+                }
+            }
+
+            function checkAddress() {
+                var len = $("input[id=uaddress]").val().length;
+                if (len == 0) {
+                    $("#uaddress_err").text("Cannot Empty Address Field!");
+                    $("#uaddress_err").show();
+                }
+            }
+        });
+    </script>
+
+    <div>
+        <a href="../Home/login_view">Login!</a>
+    </div>
+</div>
